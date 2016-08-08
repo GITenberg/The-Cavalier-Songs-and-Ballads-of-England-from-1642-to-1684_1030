@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: aLyr3EWrgQJlUm66zGMgBql7QdJkRP5zFoHsjl6Du+kqbHS8RJXlr+88qYio7Cl1jqWR5vmNKmVxzboSOevU8iyPPeQS271tOOTRhNlPOeBdJ4zjarxD00OpvtlLPk4qLq7YathbxabZFwCuVEJnz7U9cwZYbrDJZBTVU0Bfpy9CW+s5KPPMZTfwFlN8XWxsMZn29dY7VIXBX6L4pgw2iLAH40+KGzzlRjo5nN461xTM43lCashXNmvhIDAGuXzwtZy2rAg1zWNZaQrH3QFSZMurNsLukUzSBroSZlcq5T+a1cmxoyHPXAm5jyOdDV3QqvCD7xS07YGMiRjLU5MGlDLXKD+iecHrVAUIlna/yvtyvg2OVbWjn5q2ocQn+bwLZOlsRKTKy8U0GfbA7xLyycUK0sRx/YnGxqrUzGejG6jcc7kQC+HZ9RVw+1g+nOOun7b8XkGfThWUbAFAvACcHok6kj0dFa6xA09a2rs+yKEdW5e7zSwl0jtIRE2moWOZroRZs2mU8djSlxTiyb6Uha9hBFDA4lGV4BVbNinqAHQgeuA80RoDZVOkruuNUbcMNxlSTw+UZ+5IYRSBAC3DqIOkmEKwFiXYUCWLrIBF0rxnevd3DPdMyFq54Na5j9p6Xvi94o+iq/uMfQdMVUtpYZCDPc6NHVh453MkkJnyaPI=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/The-Cavalier-Songs-and-Ballads-of-England-from-1642-to-1684_1030
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
