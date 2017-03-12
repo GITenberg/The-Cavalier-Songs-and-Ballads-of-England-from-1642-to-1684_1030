@@ -1,5 +1,5 @@
 _repo: The-Cavalier-Songs-and-Ballads-of-England-from-1642-to-1684_1030
-_version: 0.1.0
+_version: 0.2.0
 contributor:
   creator:
     editor:
@@ -10,7 +10,12 @@ contributor:
       gutenberg_agent_id: '516'
       url: http://www.gutenberg.org/2009/agents/516
       wikipedia: http://en.wikipedia.org/wiki/Charles_Mackay
+covers:
+- cover_type: generated
+  image_path: cover.png
 description: ''
+edition_identifiers:
+  edition_id: http://www.gutenberg.org/ebooks/1030#The-Cavalier-Songs-and-Ballads-of-England-from-1642-to-1684
 gutenberg_issued: '1997-09-01'
 gutenberg_type: Text
 identifiers:
