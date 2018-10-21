@@ -1,5 +1,5 @@
 _repo: The-Cavalier-Songs-and-Ballads-of-England-from-1642-to-1684_1030
-_version: 0.2.0
+_version: 0.2.1
 contributor:
   creator:
     editor:
@@ -28,5 +28,6 @@ subjects:
 - !lcc 'PR'
 - !lcsh 'English poetry -- Early modern, 1500-1700'
 - !lcsh 'Ballads, English'
+- GITenberg
 title: The Cavalier Songs and Ballads of England from 1642 to 1684
 url: http://www.gutenberg.org/ebooks/1030
